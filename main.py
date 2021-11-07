@@ -2,13 +2,12 @@ from helper import *                       #importing all the helper fxn from he
 import streamlit as st
 import re
 import sys
-from streamlit.cli import main
-# import os
-# import matplotlib.pyplot as plt
-# import seaborn as sns
+import os
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# sns.set_theme(style="darkgrid")
-# sns.set()
+sns.set_theme(style="darkgrid")
+sns.set()
 # from PIL import Image
 st.title('Caption Generator')
 
@@ -41,5 +40,4 @@ def main():
 
 
 if __name__ =='__main__':
-    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
-    sys.exit(main())
+    main()
