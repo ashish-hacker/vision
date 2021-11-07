@@ -6,7 +6,6 @@ import os
 from streamlit.cli import main
 from PIL import Image
 
-st.title('Caption Generator')
 
 
 
@@ -21,8 +20,8 @@ def save_uploaded_file(uploaded_file):
 def main():
     st.set_option('deprecation.showfileUploaderEncoding', False)
     st.markdown("<h1 style='text-align: center; color: White;background-color:#e84343'>Caption Generator</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center; color: Black;'>Drop in The required Inputs and we will do  the rest.</h3>", unsafe_allow_html=True)
-    st.markdown("<h4 style='text-align: center; color: Black;'>Submission for The Project</h4>", unsafe_allow_html=True)
+    
+    st.markdown("<h4 style='text-align: center; color: Black;'>Upload Image</h4>", unsafe_allow_html=True)
     st.sidebar.header("What is this Project about?")
     st.sidebar.text("It a Web app that would help the user generate caption from an image. In other words it shows the ability of computers to visualize images conceptually.")
     st.sidebar.header("What tools where used to make this?")
