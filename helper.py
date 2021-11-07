@@ -1,14 +1,27 @@
+from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
-from PIL import Image
+from keras.applications.xception import Xception
+from keras.models import load_model
+from pickle import load
 import numpy as np
+from PIL import Image
+import matplotlib.pyplot as plt
 
 
-def extract_features(image, model):
+# import argparse
+# ap = argparse.ArgumentParser()
+# ap.add_argument('-i', '--image', required=True, help="Image Path")
+# args = vars(ap.parse_args())
+# img_path = args['image']
+
+def extract_features(img, model):
         # try:
         #     image = Image.open(filename)
             
         # except:
         #     print("ERROR: Couldn't open image! Make sure the image path and extension is correct")
+        
+        image = img
         image = image.resize((299,299))
         image = np.array(image)
         # for images that has 4 channels, we convert them into 3 channels
@@ -41,3 +54,22 @@ def generate_desc(model, tokenizer, photo, max_length):
         if word == 'end':
             break
     return in_text
+
+
+
+def generate_caption(img):
+    max_length = 32
+    tokenizer = load(open("static/tokenizer.p","rb"))
+    model = load_model('static/models/model_9.h5')
+    xception_model = Xception(include_top=False, pooling="avg")
+
+    photo = extract_features(img, xception_model)
+    # img = Image.open(img_path)
+
+    description = generate_desc(model, tokenizer, photo, max_length)
+    print("\n\n")
+    print(description)
+    return description
+    plt.imshow(img)
+
+

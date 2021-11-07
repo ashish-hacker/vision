@@ -1,64 +1,47 @@
 from helper import *                       #importing all the helper fxn from helper.py which we will create later
-from keras.applications.xception import Xception
-from keras.models import load_model
-from pickle import load
-import numpy as np
-from PIL import Image
-import matplotlib.pyplot as plt
 import streamlit as st
+import re
+import sys
 import os
-import matplotlib.pyplot as plt
-# import seaborn as sns
+from streamlit.cli import main
+from PIL import Image
 
-# sns.set_theme(style="darkgrid")
-# sns.set()
-# from PIL import Image
-# st.title('Caption Generator')
+st.title('Caption Generator')
 
-#loading our model
-#model = pickle.load(open('model.pkl','rb'))
 
-def save_img(img):
+
+def save_uploaded_file(uploaded_file):
     try:
-        with open(os.path.join('static/images',img.name),'wb') as f:
-            f.write(img.getbuffer())
+        with open(os.path.join('static/images',uploaded_file.name),'wb') as f:
+            f.write(uploaded_file.getbuffer())
         return 1
     except:
         return 0
 
 def main():
+    st.set_option('deprecation.showfileUploaderEncoding', False)
     st.markdown("<h1 style='text-align: center; color: White;background-color:#e84343'>Caption Generator</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center; color: Black;'>Upload Image.</h3>", unsafe_allow_html=True)
-    img = st.file_uploader("Upload Files",type=['png','jpeg','jpg'])
-    # st.image(img,width=250,height=250)
-    # st.markdown("<h4 style='text-align: center; color: Black;'>Submission for The Project</h4>", unsafe_allow_html=True)
-
-    file = img.getvalue()
+    st.markdown("<h3 style='text-align: center; color: Black;'>Drop in The required Inputs and we will do  the rest.</h3>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center; color: Black;'>Submission for The Project</h4>", unsafe_allow_html=True)
     st.sidebar.header("What is this Project about?")
     st.sidebar.text("It a Web app that would help the user generate caption from an image. In other words it shows the ability of computers to visualize images conceptually.")
     st.sidebar.header("What tools where used to make this?")
     st.sidebar.text("The Model was made using a dataset from Google along with using Google colab to train the model. We made use of Deep Neural Networks to train the model.")
-    max_length = 32
-
-
-    tokenizer = load(open("tokenizer.p", "rb"))
-    model = load_model('models/model_9.h5')
-    xception_model = Xception(include_top=False, pooling="avg")
-    path = '/home/ashish/Pictures/Heavy Metal -Memes.jpeg'
-    photo = extract_features(file, xception_model)
     
 
-    description = generate_desc(model, tokenizer, photo, max_length)
-    print("\n\n")
-    print(description)
-    plt.imshow(img)
+    uploaded_file = st.file_uploader("drop the image here")
+    
 
-    # if st.button('Predict'): #making and printing our prediction
-    #     # result = model.predict(inputs)
-    #     # updated_res = result.flatten().astype(float)
-    #     st.success('The Probability of getting admission is {}'.format(1))
+    if st.button('Generate Caption'): #making and printing our prediction
+        if uploaded_file:
+            img = Image.open(uploaded_file)
+            caption = generate_caption(img)
+            st.markdown(caption)
+        # st.success('The Probability of getting admission is {}'.format(1))
 
 
 
 if __name__ =='__main__':
     main()
+    # sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    # sys.exit(main())
