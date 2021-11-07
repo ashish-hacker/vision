@@ -3,9 +3,11 @@ import streamlit as st
 import re
 import sys
 import os
+import pyttsx3
 from streamlit.cli import main
 from PIL import Image
 
+engine = pyttsx3.init()
 
 
 
@@ -30,12 +32,14 @@ def main():
 
     uploaded_file = st.file_uploader("drop the image here")
     
-
+    caption = ""
     if st.button('Generate Caption'): #making and printing our prediction
         if uploaded_file:
             img = Image.open(uploaded_file)
             caption = generate_caption(img)
             st.markdown(caption)
+            engine.say(caption)
+            engine.runAndWait()
         # st.success('The Probability of getting admission is {}'.format(1))
 
 

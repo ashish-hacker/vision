@@ -41,7 +41,7 @@ def word_for_id(integer, tokenizer):
 
 
 def generate_desc(model, tokenizer, photo, max_length):
-    in_text = 'start'
+    in_text = ' '
     for i in range(max_length):
         sequence = tokenizer.texts_to_sequences([in_text])[0]
         sequence = pad_sequences([sequence], maxlen=max_length)
@@ -51,7 +51,7 @@ def generate_desc(model, tokenizer, photo, max_length):
         if word is None:
             break
         in_text += ' ' + word
-        if word == 'end':
+        if word == ' ':
             break
     return in_text
 
