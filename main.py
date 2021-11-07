@@ -37,8 +37,8 @@ def main():
         if uploaded_file:
             img = Image.open(uploaded_file)
             caption = generate_caption(img)
-            st.markdown(caption)
-            engine.say(caption)
+            st.markdown(caption[5:-3])
+            engine.say(caption[5:-3])
             engine.runAndWait()
         # st.success('The Probability of getting admission is {}'.format(1))
 
