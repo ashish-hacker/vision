@@ -4,10 +4,9 @@ import re
 import sys
 import os
 from streamlit.cli import main
-import pyttsx3
+from gtts import gTTS
 from PIL import Image
 
-engine = pyttsx3.init()
 
 
 def save_uploaded_file(uploaded_file):
@@ -39,8 +38,9 @@ def main():
             caption = generate_caption(img)
             # st.image(uploaded_file, width=264)
             st.markdown(f"<h3 style='text-align: left; color: Black;'>{caption[5:-3]}</h3>", unsafe_allow_html=True)
-            engine.say(caption[5:-3])
-            engine.runAndWait()
+            myobj = gTTS(text=caption[5:-3], lang='en', slow=False)
+            myobj.save("static/audio/audio.mp3")
+            os.system("./static/mpg321 audio.mp3")
         else:
             st.error('Select an image to generate caption')
 
