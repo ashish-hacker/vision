@@ -80,14 +80,6 @@ jupyterthemes==0.20.0
 Keras==2.4.3
 Keras-Preprocessing==1.1.0
 keyboard==0.13.5
-Kivy==2.0.0
-kivy-deps.angle==0.3.0
-kivy-deps.glew==0.3.0
-kivy-deps.sdl2==0.3.1
-Kivy-examples==2.0.0
-Kivy-Garden==0.1.4
-kiwisolver==1.1.0
-korean-lunar-calendar==0.2.1
 lazy-object-proxy==1.4.3
 lesscpy==0.14.0
 LunarCalendar==0.0.9
