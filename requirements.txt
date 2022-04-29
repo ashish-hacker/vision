@@ -157,7 +157,7 @@ stem==1.8.0
 streamlit==0.65.2
 tensorboard==2.2.1
 tensorboard-plugin-wit==1.6.0.post3
-tensorflow==2.2.0rc3
+tensorflow
 tensorflow-datasets==4.0.1
 tensorflow-hub
 tensorflow-metadata
